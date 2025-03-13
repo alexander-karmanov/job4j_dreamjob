@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:include="fragments/header :: header"></head>
+<head th:include="fragments/header :: header">
+    <meta charset="utf-8">
+</head>
 <body>
 <div class="container">
     <div class="row">
@@ -8,9 +10,9 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Имя</th>
-                <th scope="col">Описание</th>
-                <th scope="col">Дата создания</th>
+                <th scope="col">РРјСЏ</th>
+                <th scope="col">РћРїРёСЃР°РЅРёРµ</th>
+                <th scope="col">Р”Р°С‚Р° СЃРѕР·РґР°РЅРёСЏ</th>
             </tr>
             </thead>
             <tbody>
@@ -24,6 +26,6 @@
         </table>
     </div>
 </div>
-<footer th:include="fragments/footer :: footer"></footer>
+<footer th:include="blocks/footer :: footer"></footer>
 </body>
 </html>
