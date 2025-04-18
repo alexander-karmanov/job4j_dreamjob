@@ -1,11 +1,8 @@
 package ru.job4j.dreamjob.repository;
 
+import org.junit.jupiter.api.*;
 import ru.job4j.dreamjob.model.File;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 import ru.job4j.dreamjob.configuration.DatasourceConfiguration;
 import ru.job4j.dreamjob.model.Candidate;
 
@@ -71,9 +68,9 @@ public class Sql2oCandidateRepositoryTest {
     @Test
     public void whenSaveSeveralThenGetAll() {
         var creationDate = now().truncatedTo(ChronoUnit.MINUTES);
-        var candidate1 = sql2oCandidateRepository.save(new Candidate(0, "title1", "description1", creationDate, 1, file.getId()));
-        var candidate2 = sql2oCandidateRepository.save(new Candidate(0, "title2", "description2", creationDate, 1, file.getId()));
-        var candidate3 = sql2oCandidateRepository.save(new Candidate(0, "title3", "description3", creationDate, 1, file.getId()));
+        var candidate1 = sql2oCandidateRepository.save(new Candidate(0, "name", "description", creationDate, 1, file.getId()));
+        var candidate2 = sql2oCandidateRepository.save(new Candidate(0, "name", "description", creationDate, 1, file.getId()));
+        var candidate3 = sql2oCandidateRepository.save(new Candidate(0, "name", "description", creationDate, 1, file.getId()));
         var result = sql2oCandidateRepository.findAll();
         assertThat(result).isEqualTo(List.of(candidate1, candidate2, candidate3));
     }

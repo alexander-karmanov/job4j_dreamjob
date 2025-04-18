@@ -9,4 +9,5 @@
     <include file="scripts/002_dml_insert_cities.sql" relativeToChangelogFile="true"/>
     <include file="scripts/003_ddl_create_files_table.sql" relativeToChangelogFile="true"/>
     <include file="scripts/004_ddl_create_vacancies_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/005_ddl_create_candidates_table.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
