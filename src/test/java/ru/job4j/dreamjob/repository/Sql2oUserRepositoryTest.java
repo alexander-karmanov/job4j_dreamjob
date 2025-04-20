@@ -5,11 +5,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import ru.job4j.dreamjob.configuration.DatasourceConfiguration;
 import ru.job4j.dreamjob.model.User;
+
+import java.util.Optional;
 import java.util.Properties;
 
 import static java.util.Collections.emptyList;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class Sql2oUserRepositoryTest {
     private static Sql2oUserRepository sql2oUserRepository;
@@ -58,9 +59,11 @@ public class Sql2oUserRepositoryTest {
 
     @Test
     public void whenSaveExistingEmail() {
-        var user1 = sql2oUserRepository.save(new User(6, "semenov@mail.ru", "Nikolay Semenov", "123")).get();
-        assertThatThrownBy(() -> sql2oUserRepository.save(new User(7, "semenov@mail.ru", "Anatoliy Semenov", "s789")))
-                .isInstanceOf(RuntimeException.class).hasMessage("IOExeption in save() method Sql2oUserRepository.class");
+        sql2oUserRepository.save(new User(6, "semenov@mail.ru", "Nikolay Semenov", "123")).get();
+        var savedUser = sql2oUserRepository.save(
+                new User(7, "semenov@mail.ru", "Anatoliy Semenov", "s789")
+        );
+        assertThat(savedUser).isEqualTo(Optional.empty());
     }
 
     @Test
