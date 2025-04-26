@@ -28,7 +28,12 @@ public class VacancyController {
     }
 
     @GetMapping
-    public String getAll(Model model) {
+    public String getAll(Model model, HttpSession session) {
+        var user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = new User();
+            user.setName("Гость");
+        }
         model.addAttribute("vacancies", vacancyService.findAll());
         return "vacancies/list";
     }
@@ -85,22 +90,5 @@ public class VacancyController {
             return "errors/404";
         }
         return "redirect:/vacancies";
-    }
-
-    @GetMapping("/login")
-    public String getLoginPage(Model model, HttpSession session) {
-        var user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = new User();
-            user.setName("Гость");
-        }
-        model.addAttribute("user", user);
-        return "users/login";
-    }
-
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "redirect:/users/login";
     }
 }

@@ -27,7 +27,12 @@ public class CandidateController {
     }
 
     @GetMapping
-    public String getAll(Model model) {
+    public String getAll(Model model, HttpSession session) {
+        var user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = new User();
+            user.setName("Гость");
+        }
         model.addAttribute("candidates", candidateService.findAll());
         return "candidates/list";
     }
@@ -84,22 +89,5 @@ public class CandidateController {
             return "errors/404";
         }
         return "redirect:/candidates";
-    }
-
-    @GetMapping("/login")
-    public String getLoginPage(Model model, HttpSession session) {
-        var user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = new User();
-            user.setName("Гость");
-        }
-        model.addAttribute("user", user);
-        return "users/login";
-    }
-
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "redirect:/users/login";
     }
 }
