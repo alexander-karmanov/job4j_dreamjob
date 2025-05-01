@@ -22,13 +22,13 @@ public class VacancyController {
 
     private final CityService cityService;
 
-    public VacancyController(VacancyService vacancyService, CityService cityService, FileService fileService) {
+    public VacancyController(VacancyService vacancyService, CityService cityService) {
         this.vacancyService = vacancyService;
         this.cityService = cityService;
     }
 
     @GetMapping
-    public String getAll(Model model, HttpSession session) {
+    public String getAll(Model model) {
         model.addAttribute("vacancies", vacancyService.findAll());
         return "vacancies/list";
     }
